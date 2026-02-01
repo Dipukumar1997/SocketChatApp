@@ -1,27 +1,35 @@
 # Socket Chat Application (C++)
 
 A real-time, console-based TCP chat application implemented in C++.  
-The project follows a **client–server architecture** and demonstrates **low-level socket programming**, **multithreaded I/O**, and **thread-safe console handling**.
+The project uses a **client–server architecture** and demonstrates **low-level socket programming**, **multithreaded I/O**, and **thread-safe console handling**.
 
-The client is implemented using **Winsock (Windows)** and communicates with the server over **TCP/IP** for reliable message delivery.
+## Project Structure
+
+- **Client**
+  - `ChatClient_cross_platform.cpp` — Cross-platform client (Windows & Linux)
+  - `ChatClient_win_only.cpp` — Windows-only client using Winsock
+
+- **Server**
+  - `ChatServer_cross_platform.cpp` — Cross-platform server (Windows & Linux)
+  - `ChatServer_win_only.cpp` — Windows-only server using Winsock
 
 ## Key Technical Details
-- Uses **TCP sockets** (AF_INET, SOCK_STREAM) for reliable communication
-- Client implemented using **Winsock 2.2**
-- **Multithreaded design**:
-  - One thread for sending user input
-  - One thread for receiving server messages
-- **Thread-safe console output** using `std::mutex`
+- Uses **TCP sockets** (`AF_INET`, `SOCK_STREAM`) for reliable communication
+- Multithreaded design with separate send/receive threads
+- Thread-safe console output using `std::mutex`
 - Graceful connection handling and clean shutdown (`quit` / `exit`)
 - Full-line input handling with username-prefixed messages
 
 ## Build and Run
 
-### Windows (MinGW) and Linux
+### Server (Run the server first // then run the client similarly)
+
+#### Cross-platform (Linux & Windows)
 ```bash
-g++ ChatClient.cpp -o client.exe -lws2_32
-client.exe
+# Linux
+g++ server/ChatServer_cross_platform.cpp -o server -lpthread
+./server
 
-g++ client.cpp -o client -lpthread
-./client
-
+# Windows (MinGW)
+g++ server/ChatServer_cross_platform.cpp -o server.exe -lws2_32
+server.exe

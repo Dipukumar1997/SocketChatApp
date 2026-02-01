@@ -1,13 +1,27 @@
 # Socket Chat Application (C++)
 
-A real-time, console-based multi-client chat application developed in C++ using **TCP/IP socket programming**. The application follows a **client–server architecture**, where the server manages multiple concurrent client connections using **POSIX threads (pthreads)** and ensures **thread-safe message broadcasting** over TCP sockets.
+A real-time, console-based TCP chat application implemented in C++.  
+The project follows a **client–server architecture** and demonstrates **low-level socket programming**, **multithreaded I/O**, and **thread-safe console handling**.
+
+The client is implemented using **Winsock (Windows)** and communicates with the server over **TCP/IP** for reliable message delivery.
+
+## Key Technical Details
+- Uses **TCP sockets** (AF_INET, SOCK_STREAM) for reliable communication
+- Client implemented using **Winsock 2.2**
+- **Multithreaded design**:
+  - One thread for sending user input
+  - One thread for receiving server messages
+- **Thread-safe console output** using `std::mutex`
+- Graceful connection handling and clean shutdown (`quit` / `exit`)
+- Full-line input handling with username-prefixed messages
 
 ## Build and Run
 
-### Linux / macOS
+### Windows (MinGW) and Linux
 ```bash
-g++ server.cpp -o server -lpthread
-g++ client.cpp -o client -lpthread
+g++ ChatClient.cpp -o client.exe -lws2_32
+client.exe
 
-./server
+g++ client.cpp -o client -lpthread
 ./client
+

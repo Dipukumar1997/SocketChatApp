@@ -1,6 +1,6 @@
 # Socket Chat Application (C++)
 
-A real-time multi-client chat application implemented using C++ and TCP socket programming.
+A real-time, console-based multi-client chat application developed in C++ using **TCP/IP socket programming**. The application follows a **client–server architecture**, where the server manages multiple concurrent client connections using **POSIX threads (pthreads)** and ensures **thread-safe message broadcasting** over TCP sockets.
 
 ## Build and Run
 
